@@ -43,7 +43,11 @@ class ItemsPageState extends State<ItemsPage> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF3A0CA3), Color(0xFFF72585)],
+            colors: [
+              Color(0xFF12c2e9), // cyan
+              Color(0xFFc471ed), // purple
+              Color(0xFFf64f59), // pink/red
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -51,16 +55,24 @@ class ItemsPageState extends State<ItemsPage> {
         child: SafeArea(
           child: Column(
             children: [
+              // Header
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 child: Row(
                   children: [
                     Text(
-                      '🛍️ Thrift Store',
+                      'Reynaldo Store',
                       style: GoogleFonts.poppins(
-                        fontSize: 24,
+                        fontSize: 26,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            blurRadius: 6,
+                            color: Colors.black.withOpacity(0.3),
+                            offset: const Offset(2, 2),
+                          ),
+                        ],
                       ),
                     ),
                     const Spacer(),
@@ -115,7 +127,7 @@ class ItemsPageState extends State<ItemsPage> {
                         gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          childAspectRatio: 0.65,
+                          childAspectRatio: 0.68,
                           crossAxisSpacing: 16,
                           mainAxisSpacing: 16,
                         ),
@@ -128,11 +140,11 @@ class ItemsPageState extends State<ItemsPage> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(20),
-                              boxShadow: const [
+                              boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black26,
-                                  blurRadius: 8,
-                                  offset: Offset(0, 4),
+                                  color: Colors.black.withOpacity(0.15),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 6),
                                 ),
                               ],
                             ),
@@ -154,9 +166,10 @@ class ItemsPageState extends State<ItemsPage> {
                                           top: 8,
                                           right: 8,
                                           child: Container(
-                                            decoration: const BoxDecoration(
-                                              color: Colors.black38,
-                                              shape: BoxShape.circle,
+                                            decoration: BoxDecoration(
+                                              color: Colors.black54,
+                                              borderRadius:
+                                              BorderRadius.circular(30),
                                             ),
                                             child: IconButton(
                                               icon: const Icon(
@@ -173,7 +186,7 @@ class ItemsPageState extends State<ItemsPage> {
                                   ),
                                 ),
 
-                                // Details section
+                                // Details
                                 Padding(
                                   padding: const EdgeInsets.all(12),
                                   child: Column(
@@ -187,6 +200,7 @@ class ItemsPageState extends State<ItemsPage> {
                                         style: GoogleFonts.poppins(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
+                                          color: Colors.black87,
                                         ),
                                       ),
                                       const SizedBox(height: 6),
@@ -194,7 +208,8 @@ class ItemsPageState extends State<ItemsPage> {
                                         'Php ${item.price.toStringAsFixed(2)}',
                                         style: GoogleFonts.poppins(
                                           fontSize: 14,
-                                          color: const Color(0xFF7209B7),
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color(0xFFf64f59),
                                         ),
                                       ),
                                       const SizedBox(height: 6),
@@ -204,23 +219,24 @@ class ItemsPageState extends State<ItemsPage> {
                                         overflow: TextOverflow.ellipsis,
                                         style: GoogleFonts.poppins(
                                           fontSize: 12,
-                                          color: Colors.grey[600],
+                                          color: Colors.grey[700],
                                         ),
                                       ),
-                                      const SizedBox(height: 8),
+                                      const SizedBox(height: 10),
                                       SizedBox(
                                         width: double.infinity,
                                         child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                            backgroundColor:
-                                            const Color(0xFFF72585),
-                                            padding:
-                                            const EdgeInsets.symmetric(
-                                                vertical: 10),
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 12),
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(12),
+                                              BorderRadius.circular(14),
                                             ),
+                                            elevation: 4,
+                                            backgroundColor:
+                                            const Color(0xFF7209B7),
+                                            foregroundColor: Colors.white,
                                           ),
                                           onPressed: () {
                                             Navigator.pushNamed(
@@ -230,9 +246,10 @@ class ItemsPageState extends State<ItemsPage> {
                                             );
                                           },
                                           child: Text(
-                                            'Details',
+                                            'View Details',
                                             style: GoogleFonts.poppins(
-                                                color: Colors.white),
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -253,12 +270,15 @@ class ItemsPageState extends State<ItemsPage> {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: FloatingActionButton.extended(
-                  backgroundColor: Colors.white,
-                  foregroundColor: const Color(0xFF3A0CA3),
+                  backgroundColor: const Color(0xFF12c2e9),
+                  foregroundColor: Colors.white,
                   icon: const Icon(Icons.add),
                   label: Text(
                     'Add New',
-                    style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
                   ),
                   onPressed: () async {
                     await Navigator.pushNamed(context, '/add');

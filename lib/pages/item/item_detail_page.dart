@@ -22,9 +22,13 @@ class ItemDetailPage extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFFF72585), Color(0xFF3A0CA3)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF12c2e9), // cyan
+              Color(0xFFc471ed), // purple
+              Color(0xFFf64f59), // pink/red
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
         ),
         child: SafeArea(
@@ -64,29 +68,38 @@ class ItemDetailPage extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () => Navigator.pop(context),
-                            child:
-                            const Icon(Icons.arrow_back_ios, color: Colors.white),
+                            child: const Icon(Icons.arrow_back_ios,
+                                color: Colors.white),
                           ),
                           const SizedBox(width: 8),
                           Text(
                             'Details',
                             style: GoogleFonts.poppins(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 6,
+                                  color: Colors.black.withOpacity(0.3),
+                                  offset: const Offset(2, 2),
+                                )
+                              ],
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 20),
 
                       // Tappable image with Hero
                       GestureDetector(
                         onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) =>
-                                FullScreenImagePage(itemId: item.id, imageUrl: item.imageUrl),
+                            builder: (_) => FullScreenImagePage(
+                              itemId: item.id,
+                              imageUrl: item.imageUrl,
+                            ),
                           ),
                         ),
                         child: Hero(
@@ -94,11 +107,11 @@ class ItemDetailPage extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              boxShadow: const [
+                              boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black38,
+                                  color: Colors.black.withOpacity(0.3),
                                   blurRadius: 12,
-                                  offset: Offset(0, 6),
+                                  offset: const Offset(0, 6),
                                 ),
                               ],
                             ),
@@ -128,18 +141,25 @@ class ItemDetailPage extends StatelessWidget {
                         '₱ ${item.price.toStringAsFixed(2)}',
                         style: GoogleFonts.poppins(
                           fontSize: 22,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.yellowAccent,
+                          fontWeight: FontWeight.w600,
+                          color: const Color(0xFFf64f59),
                         ),
                       ),
                       const SizedBox(height: 24),
 
-                      // Description
+                      // Description card
                       Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.9),
-                          borderRadius: BorderRadius.circular(16),
+                          color: Colors.white.withOpacity(0.95),
+                          borderRadius: BorderRadius.circular(18),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.15),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,22 +169,25 @@ class ItemDetailPage extends StatelessWidget {
                               style: GoogleFonts.poppins(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.deepPurple,
+                                color: const Color(0xFF7209B7),
                               ),
                             ),
                             const SizedBox(height: 8),
                             Text(
                               item.description,
-                              style: GoogleFonts.poppins(fontSize: 14),
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                color: Colors.black87,
+                              ),
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 20),
 
                       // Info chips
                       SizedBox(
-                        height: 40,
+                        height: 42,
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
@@ -175,7 +198,8 @@ class ItemDetailPage extends StatelessWidget {
                               const SizedBox(width: 8),
                               InfoChip(
                                 icon: Icons.calendar_today,
-                                text: '${item.createdAt.month}/${item.createdAt.day}/${item.createdAt.year}',
+                                text:
+                                '${item.createdAt.month}/${item.createdAt.day}/${item.createdAt.year}',
                               ),
                             ],
                           ),
@@ -191,11 +215,13 @@ class ItemDetailPage extends StatelessWidget {
                     right: 16,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.yellowAccent,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(14),
                         ),
+                        elevation: 6,
+                        backgroundColor: const Color(0xFF7209B7),
+                        foregroundColor: Colors.white,
                       ),
                       onPressed: () async {
                         final email = snap.data!.contactInfo.trim();
@@ -210,14 +236,16 @@ class ItemDetailPage extends StatelessWidget {
                             context: context,
                             builder: (_) => AlertDialog(
                               title: Text('Contact Owner',
-                                  style: GoogleFonts.poppins()),
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w600)),
                               content: SelectableText(email,
                                   style: GoogleFonts.poppins()),
                               actions: [
                                 TextButton(
                                   onPressed: () => Navigator.pop(context),
                                   child: Text('Close',
-                                      style: GoogleFonts.poppins()),
+                                      style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w500)),
                                 ),
                               ],
                             ),
@@ -229,7 +257,6 @@ class ItemDetailPage extends StatelessWidget {
                         style: GoogleFonts.poppins(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.deepPurple,
                         ),
                       ),
                     ),

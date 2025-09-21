@@ -1,4 +1,4 @@
-// lib/pages/add_item_page.dart
+// lib/pages/item/add_item_page.dart
 
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -11,6 +11,7 @@ import '../../widgets/custom_input_field.dart';
 
 class AddItemPage extends StatefulWidget {
   const AddItemPage({super.key});
+
   @override
   AddItemPageState createState() => AddItemPageState();
 }
@@ -68,7 +69,7 @@ class AddItemPageState extends State<AddItemPage> {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xFF7209B7), Color(0xFFFF006E)],
+          colors: [Color(0xFF4facfe), Color(0xFF00f2fe)], // same as items_page
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -84,7 +85,10 @@ class AddItemPageState extends State<AddItemPage> {
           title: Text(
             '✨ Add Your Thrift',
             style: GoogleFonts.poppins(
-                fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
           centerTitle: true,
         ),
@@ -144,7 +148,9 @@ class AddItemPageState extends State<AddItemPage> {
                   icon: const Icon(Icons.photo_library, size: 24),
                   label: Text(
                     'Choose Photo',
-                    style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white.withOpacity(0.9),
@@ -160,7 +166,11 @@ class AddItemPageState extends State<AddItemPage> {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(12),
-                      child: Image.file(_image!, height: 180, fit: BoxFit.cover),
+                      child: Image.file(
+                        _image!,
+                        height: 180,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     const SizedBox(height: 8),
                     TextButton(
