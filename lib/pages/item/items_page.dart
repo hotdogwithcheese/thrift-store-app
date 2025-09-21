@@ -44,9 +44,8 @@ class ItemsPageState extends State<ItemsPage> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF12c2e9), // cyan
-              Color(0xFFc471ed), // purple
-              Color(0xFFf64f59), // pink/red
+              Color(0xFFFF9A9E), // soft pink
+              Color(0xFFFECFEF), // light blush
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -61,7 +60,7 @@ class ItemsPageState extends State<ItemsPage> {
                 child: Row(
                   children: [
                     Text(
-                      'Reynaldo Store',
+                      '🛍️ Kyla Store',
                       style: GoogleFonts.poppins(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
@@ -91,7 +90,7 @@ class ItemsPageState extends State<ItemsPage> {
               // Content grid
               Expanded(
                 child: RefreshIndicator(
-                  color: Colors.white,
+                  color: Colors.pinkAccent,
                   onRefresh: _refresh,
                   child: FutureBuilder<List<Item>>(
                     future: _fetchFuture,
@@ -133,7 +132,7 @@ class ItemsPageState extends State<ItemsPage> {
                         ),
                         itemCount: items.length,
                         itemBuilder: (context, i) {
-                          final item    = items[i];
+                          final item = items[i];
                           final isOwner = item.uploaderEmail == currentEmail;
 
                           return Container(
@@ -172,8 +171,8 @@ class ItemsPageState extends State<ItemsPage> {
                                               BorderRadius.circular(30),
                                             ),
                                             child: IconButton(
-                                              icon: const Icon(
-                                                  Icons.delete, size: 20),
+                                              icon: const Icon(Icons.delete,
+                                                  size: 20),
                                               color: Colors.white,
                                               onPressed: () async {
                                                 await svc.deleteItem(item.id);
@@ -209,7 +208,7 @@ class ItemsPageState extends State<ItemsPage> {
                                         style: GoogleFonts.poppins(
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
-                                          color: const Color(0xFFf64f59),
+                                          color: Colors.pink,
                                         ),
                                       ),
                                       const SizedBox(height: 6),
@@ -234,8 +233,7 @@ class ItemsPageState extends State<ItemsPage> {
                                               BorderRadius.circular(14),
                                             ),
                                             elevation: 4,
-                                            backgroundColor:
-                                            const Color(0xFF7209B7),
+                                            backgroundColor: Colors.pinkAccent,
                                             foregroundColor: Colors.white,
                                           ),
                                           onPressed: () {
@@ -246,7 +244,7 @@ class ItemsPageState extends State<ItemsPage> {
                                             );
                                           },
                                           child: Text(
-                                            'View Details',
+                                            'Details',
                                             style: GoogleFonts.poppins(
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -270,8 +268,8 @@ class ItemsPageState extends State<ItemsPage> {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: FloatingActionButton.extended(
-                  backgroundColor: const Color(0xFF12c2e9),
-                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.pinkAccent,
                   icon: const Icon(Icons.add),
                   label: Text(
                     'Add New',
